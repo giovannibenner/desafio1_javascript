@@ -1,0 +1,70 @@
+/* CONFIGURAÇÃO */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font_padrao);
+}
+
+:root {
+    --font_padrao: 'Poppins';
+}
+
+main {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    padding: 10px;
+}
+
+span {
+    color: deepskyblue;
+}
+
+.formulario {
+    width: 300px;
+    height: auto;
+
+    padding: 20px;
+
+    border: 1px solid black;
+
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    padding: 5px;
+}
+
+input {
+    width: auto;
+    height: 2em;
+    padding: 5px;
+
+    border: 1px solid black;
+    border-radius: 2px;
+}
+
+.button {
+    height: 4em;
+
+    margin-top: 10px;
+
+    color: white;
+    font-size: 1rem;
+    background-color: gray;
+}
+
+.button:hover {
+    color: black;
+    background-color: deepskyblue;
+}
