@@ -35,6 +35,7 @@ function ValidarLogin()
             }
         }catch(erro)
         {
+            console.log(erro);
             alert(erro);
         }
     })
