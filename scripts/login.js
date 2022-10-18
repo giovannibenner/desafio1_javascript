@@ -3,7 +3,6 @@ function ValidarLogin()
     fetch('usuario.json')
     .then((response) => response.json())
     .then((data) => {
-        // console.log(data["users"])
 
         let username = document.getElementById("user").value;
         let password = document.getElementById("password").value;
