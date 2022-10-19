@@ -67,3 +67,12 @@ main {
 
     padding: 10px;
 }
+
+.bottom-button{
+    padding: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.prev-next {
+    width: 2rem;
+}

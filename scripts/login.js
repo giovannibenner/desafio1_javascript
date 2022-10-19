@@ -9,13 +9,13 @@ function ValidarLogin()
 
         let validate = false;
         data["users"].forEach(user => {
-            if(user.user == username)
+
+            if(user.user == username  && user.pws == password)
             {
-                if(user.pws == password)
-                {
-                    validate = true;
-                    return;
-                }
+                validate = true;
+                let form = document.getElementById('login');
+                form.action = "painel.html";
+                form.submit();
             }
         }
         );
@@ -24,9 +24,7 @@ function ValidarLogin()
         {
             if(validate)
             {
-                let form = document.getElementById('login');
-                form.action = "painel.html";
-                form.submit();
+                throw "Sucesso";
             }
             else
             {
