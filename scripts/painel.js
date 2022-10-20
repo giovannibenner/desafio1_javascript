@@ -38,7 +38,6 @@ for(let i = 0; i < button.length; i++)
     })
 }
 
-
 // Quebra galho por enquanto, refatorar depois
 let x = document.querySelectorAll(".x-button");
 for(let i = 0; i < x.length; i++)
@@ -208,3 +207,17 @@ function SalvarProduto()
     produtos.push(novoproduto);
     NavegaProduto(1);
 }
+
+let idCliente = document.forms[2];
+idCliente[0].addEventListener('focusout', (event) => {
+    if(idCliente[0].value >= clientes.lenght || idCliente[0] < 1)
+        console.log("erro");
+    else
+        idCliente[1].value = clientes[event.target.value -1]["nomeCliente"];
+});
+
+let idProduto = document.forms[2];
+idProduto[2].addEventListener('focusout', (event) => {
+    idProduto[3].value = produtos[event.target.value -1]["descProduto"];
+    idProduto[4].value = produtos[event.target.value -1]["precoProduto"];
+});
