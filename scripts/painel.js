@@ -28,24 +28,18 @@ for(let i = 0; i < button.length; i++)
                 NavegaProduto(1);
     
             for(let forms of active)
-            {
                 forms.classList.add("hidden");
-                forms.classList.remove("visible");
-            }
-            
-            form.classList.add("visible");
+
             form.classList.remove("hidden");
         }
         else
-        {
             form.classList.add("hidden");
-            form.classList.remove("visible");
-        }
+
     })
 }
 
 
-// Quebra galho por enquanto, refatorar demais
+// Quebra galho por enquanto, refatorar depois
 let x = document.querySelectorAll(".x-button");
 for(let i = 0; i < x.length; i++)
 {
@@ -92,13 +86,11 @@ function NavegaCliente(cod)
 
 function NavegaProduto(cod)
 {
-    console.log(cod)
     try{
         if(cod < 1 || cod > produtos.length)
             throw "Erro";
 
         let form = document.forms[1];
-        console.log(form)
         form[0].value = produtos[cod-1]["codProduto"];
         form[1].value = produtos[cod-1]["descProduto"];
         form[2].value = produtos[cod-1]["precoProduto"];
@@ -188,6 +180,7 @@ function SalvarCliente()
     }
 
     clientes.push(novocliente);
+    NavegaCliente(1);
 }
 
 function SalvarProduto()
@@ -213,4 +206,5 @@ function SalvarProduto()
     }
 
     produtos.push(novoproduto);
+    NavegaProduto(1);
 }

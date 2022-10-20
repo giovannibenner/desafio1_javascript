@@ -16,7 +16,7 @@
 </head>
 <body>
     <main style="display: flex; align-items: center;">
-        <div class="sidemenu">
+        <header class="sidemenu">
             <div class="logo">Logo</div>
             <nav>
                 <ul>
@@ -40,12 +40,12 @@
                     </div>
                 </ul>
             </nav>
-        </div>
-
+        </header>
+    
         <form action="#" id="clientes" class="form hidden">
             <div class="title">
                 <h2>Clientes</h2>
-                <i class="x-button" id="click-clientes">X</i>
+                <p class="x-button" id="click-clientes">X</p>
             </div>
 
             <div class="input-div">
@@ -64,12 +64,11 @@
                     <button id="prev-cliente" class="prev-next" type="button">&#60;</button>
                     <button id="next-cliente" class="prev-next" type="button">&#62;</button>
                 </div>
-                <div>
+                <div class="new-save">
                     <button id="new-cliente" type="button" class="new">Novo</button>
                     <button id="save-cliente" type="button" class="save">Salvar</button>
                 </div>
             </div>
-            
         </form>
 
         <form action="" id="produtos" class="form hidden">
@@ -97,7 +96,7 @@
                     <button id="prev-produto" class="prev-next" type="button">&#60;</button>
                     <button id="next-produto" class="prev-next" type="button">&#62;</button>
                 </div>
-                <div>
+                <div class="new-save">
                     <button id="new-produto" type="button" class="new">Novo</button>
                     <button id="save-produto" type="button" class="save">Salvar</button>
                 </div>
@@ -116,28 +115,41 @@
                 <input type="text" name="" id="" class="input">
 
                 <label for="">Cliente</label>
-                <input type="text" name="" id="" class="input">
+                <input type="text" name="" id="" class="input" disabled>
 
                 <div class="divider"></div>
 
                 <label for="">Localizar produto</label>
-                <input type="number" name="" id="" class="input">
+                <div class="produtos-input">
+                    <input type="number" class="input-number" placeholder="cod">
+                    <input type="text" class="" disabled>
+                    <input type="number" class="input-number" disabled>
+                    <input type="number" class="input-number" placeholder="qtd">
+                    <button class="localizar" type="button">Lançar no Pedido</button>
+                </div>
 
                 <div class="divider"></div>
 
-                <label for="">Itens do Pedido</label>
-                <input type="number" name="" id="" class="input">
+                <div class="itens">
+                    <label for="">Itens do Pedido</label>
+                    <table>
+                        <tr class="line">
+                            <th>Item</th>
+                            <th>Descrição</th>
+                            <th>Preço</th>
+                            <th>Qtd</th>
+                            <th>Sub Total</th>
+                        </tr>
+                        <tr class="line total">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Total(R$): </td>
+                            <td style="color: lightsalmon">00.00</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-
-            <div class="bottom-button">
-                <div>
-                    <button class="prev-next" type="button">&#60;</button>
-                    <button class="prev-next" type="button">&#62;</button>
-                </div>
-                <div>
-                    <button type="button" class="new">Novo</button>
-                    <button type="button">Salvar</button>
-                </div>
             </div>
         </form>
     </main>

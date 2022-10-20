@@ -4,19 +4,33 @@
     margin: 0 auto;
 
     border: 1px solid black;
+    background-color: gray;
 
     display: flex;
     flex-direction: column;
 }
 
+label {
+    color: white;
+    margin-top: 1rem;
+}
+
 .title {
+    width: 100%;
+    height: auto;
     padding: 2rem;
+
+    color: white;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-bottom: 2px solid deepskyblue;
+
     display: flex;
     justify-content: space-between;
 }
 
 .x-button {
     color: red;
+    font-size: 20px;
 }
 
 .x-button:hover {
@@ -25,6 +39,7 @@
 
 .input-div {
     width: 100%;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -34,6 +49,7 @@
 .input {
     width: 50%;
     text-align: center;
+    font-size: 1.2rem;
 }
 
 .bottom-button {
@@ -41,18 +57,114 @@
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    padding: 2rem 0;
+    height: auto;
+    flex-wrap: wrap;
+}
+
+.bottom-button div {
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+button {
+    border-width: 0;
+    border-style: none;
+    border-color: none;
+}
+
+.prev-next {
+    width: 2rem;
+    background-color: aliceblue;
+}
+
+.new {
+    padding: 0.5rem;
+    background-color: deepskyblue;
+}
+
+.save {
+    padding: 0.5rem;
+    background-color: limegreen;
+}
+
+.prev-next:hover {
+    color: crimson;
+    font-weight: bold;
+}
+
+.new:hover, .save:hover{
+    color: white;
+}
+
+.produtos-input {
+    width: 100%;
+    padding: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.produtos-input .input-number{
+    width: 12%;
+}
+
+.produtos-input input {
+    text-align: center;
+    margin-right: 1rem;
+}
+
+.localizar {
+    padding: 0.4rem;
+    height: auto;
+    background-color: limegreen;
+}
+
+.localizar:hover {
+    color: white;
+}
+
+.itens {
+    width: 100%;
+}
+
+.itens label {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+}
+
+.line {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 10% 45% 15% 15% 15%;
+
+    text-align: center;
+}
+
+.line td {
+    color: white;
+}
+
+.total {
+    border-top: 1px solid lightgray;
+    color: black;
+    font-weight: bold;
 }
 
 .divider {
     width: 90%;
-    margin: 2rem;
+    margin: 1rem;
 
     border: 1px solid lightgray;
-}
-
-.visible {
-    visibility: visible;
-    display: inline;
 }
 
 .hidden {
