@@ -56,23 +56,7 @@ for(let i = 0; i < x.length; i++)
     })
 }
 
-// function IniciaCliente(form)
-// {
-//     form[0].value = clientes[0].codCliente;
-//     form[1].value = clientes[0].nomeCliente;
-//     form[2].value = clientes[0].dataCadCli;
-// }
-
-// function IniciaProdutos(form)
-// {
-//     form[0].value = produtos[0].codProduto;
-//     form[1].value = produtos[0].descProduto;
-//     form[2].value = produtos[0].precoProduto;
-//     form[3].value = produtos[0].qtdEstoqueProd;
-// }
-
 let prev_next = document.querySelectorAll(".prev-next");
-// console.log(prev_next);
 for(let i = 0; i < prev_next.length; i++)
 {
     prev_next[i].addEventListener('click', (button) =>
@@ -91,7 +75,6 @@ for(let i = 0; i < prev_next.length; i++)
 
 function NavegaCliente(cod)
 {
-    // console.log(cod)
     try{
         if(cod < 1 || cod > clientes.lenght)
             throw "erro";
@@ -127,11 +110,7 @@ function NavegaProduto(cod)
     }
 }
 
-
-
 let newbtn = document.querySelectorAll(".new");
-console.log(newbtn);
-
 for(let i = 0; i < newbtn.length; i++)
 {
     newbtn[i].addEventListener('click', (button) =>
@@ -169,4 +148,69 @@ function NovoProduto(cod)
     form[1].value = "";
     form[2].value = "";
     form[3].value = "";
+}
+
+let savebtn = document.querySelectorAll(".save");
+for(let i = 0; i < savebtn.length; i++)
+{
+    savebtn[i].addEventListener('click', (button) =>
+    {
+        if(button.target.id == "save-cliente")
+        {
+            SalvarCliente();
+        }
+        else if(button.target.id == "save-produto")
+        {
+            SalvarProduto();
+        }
+    })
+}
+
+function SalvarCliente()
+{
+    let form = document.forms[0];
+    let maiorCod = clientes[clientes.length-1]["codCliente"];
+
+    if(form[0].value <= maiorCod)
+    {
+        return;
+    }
+
+    if(form[1].value == "")
+    {
+        return;
+    }
+
+    let novocliente = {
+        "codCliente" : form[0].value,
+        "nomeCliente" : form[1].value,
+        "dataCadCli" : form[2].value
+    }
+
+    clientes.push(novocliente);
+}
+
+function SalvarProduto()
+{
+    let form = document.forms[1];
+    let maiorCod = produtos[produtos.length-1]["codProduto"];
+
+    if(form[0].value <= maiorCod)
+    {
+        return;
+    }
+
+    if(form[1].value == "" || form[2].value == "" || form[3].value == "") 
+    {
+        return;
+    }
+
+    let novoproduto = {
+        "codProduto"   : form[0].value,
+        "descProduto"    : form[1].value,
+        "precoProduto" : Number(form[2].value), 
+        "qtdEstoqueProd" : Number(form[3].value), 
+    }
+
+    produtos.push(novoproduto);
 }
