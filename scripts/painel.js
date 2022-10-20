@@ -23,9 +23,9 @@ for(let i = 0; i < button.length; i++)
         if(form.classList.contains("hidden"))
         {
             if(form.id == 'clientes')
-                IniciaCliente(form);
+                NavegaCliente(1);
             else if (form.id == 'produtos')
-                IniciaProdutos(form);
+                NavegaProduto(1);
     
             for(let forms of active)
             {
@@ -56,23 +56,23 @@ for(let i = 0; i < x.length; i++)
     })
 }
 
-function IniciaCliente(form)
-{
-    form[0].value = clientes[0].codCliente;
-    form[1].value = clientes[0].nomeCliente;
-    form[2].value = clientes[0].dataCadCli;
-}
+// function IniciaCliente(form)
+// {
+//     form[0].value = clientes[0].codCliente;
+//     form[1].value = clientes[0].nomeCliente;
+//     form[2].value = clientes[0].dataCadCli;
+// }
 
-function IniciaProdutos(form)
-{
-    form[0].value = produtos[0].codProduto;
-    form[1].value = produtos[0].descProduto;
-    form[2].value = produtos[0].precoProduto;
-    form[3].value = produtos[0].qtdEstoqueProd;
-}
+// function IniciaProdutos(form)
+// {
+//     form[0].value = produtos[0].codProduto;
+//     form[1].value = produtos[0].descProduto;
+//     form[2].value = produtos[0].precoProduto;
+//     form[3].value = produtos[0].qtdEstoqueProd;
+// }
 
 let prev_next = document.querySelectorAll(".prev-next");
-console.log(prev_next);
+// console.log(prev_next);
 for(let i = 0; i < prev_next.length; i++)
 {
     prev_next[i].addEventListener('click', (button) =>
@@ -91,10 +91,10 @@ for(let i = 0; i < prev_next.length; i++)
 
 function NavegaCliente(cod)
 {
-    console.log(cod)
+    // console.log(cod)
     try{
         if(cod < 1 || cod > clientes.lenght)
-            throw "Erro";
+            throw "erro";
     
         let form = document.forms[0];
         form[0].value = clientes[cod-1]["codCliente"];
@@ -103,7 +103,7 @@ function NavegaCliente(cod)
     }
     catch(erro)
     {
-        alert(erro);
+        alert("Fim de registro");
     }
 }
 
@@ -125,4 +125,48 @@ function NavegaProduto(cod)
     {
         alert(erro);
     }
+}
+
+
+
+let newbtn = document.querySelectorAll(".new");
+console.log(newbtn);
+
+for(let i = 0; i < newbtn.length; i++)
+{
+    newbtn[i].addEventListener('click', (button) =>
+    {
+        let codCliente = Number(clientes[clientes.length-1]["codCliente"]) +1;
+        let codProduto = Number(produtos[produtos.length-1]["codProduto"]) +1;
+        if(button.target.id == "new-cliente")
+        {
+            NovoCliente(codCliente);
+        }
+        else if(button.target.id == "new-produto")
+        {
+            NovoProduto(codProduto);
+        }
+    })
+}
+
+function NovoCliente(cod)
+{
+    var data = new Date();
+    var dia = data.getUTCDate();
+    var mes = data.getUTCMonth() + 1;
+    var ano = data.getUTCFullYear();
+
+    let form = document.forms[0];
+    form[0].value = cod;
+    form[1].value = "";
+    form[2].value = dia + "/" + mes + "/" + ano;
+}
+
+function NovoProduto(cod)
+{
+    let form = document.forms[1];
+    form[0].value = cod;
+    form[1].value = "";
+    form[2].value = "";
+    form[3].value = "";
 }
