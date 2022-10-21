@@ -221,3 +221,31 @@ idProduto[2].addEventListener('focusout', (event) => {
     idProduto[3].value = produtos[event.target.value -1]["descProduto"];
     idProduto[4].value = produtos[event.target.value -1]["precoProduto"];
 });
+
+let pedido = document.getElementById("insere-pedido");
+pedido.addEventListener('click', function(){
+    InsereProduto();
+});
+
+function InsereProduto()
+{
+    let table = document.querySelector("table");
+    let linha = table.insertRow(table.rows.length-1);
+    linha.classList.add("line");
+
+    let item = linha.insertCell(0);
+    let desc = linha.insertCell(1);
+    let preco = linha.insertCell(2);
+    let qtd = linha.insertCell(3);
+    let sub_total = linha.insertCell(4);
+
+    let form_pedido = document.forms[2];
+    item.innerHTML = form_pedido[2].value;
+    desc.innerHTML = form_pedido[3].value;
+    preco.innerHTML = form_pedido[4].value;
+    qtd.innerHTML = form_pedido[5].value;
+    sub_total.innerHTML = (Number(form_pedido[5].value) * Number(preco.innerHTML)).toFixed(2);
+
+    let total = document.getElementById("total");
+    total.innerHTML = (Number(total.innerHTML) + Number(sub_total.innerHTML)).toFixed(2);
+}
