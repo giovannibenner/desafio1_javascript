@@ -68,3 +68,27 @@ main {
 
     padding: 10px;
 }
+
+.modal {
+    /* width: 40%; */
+    margin: auto auto;
+    padding: 2rem;
+
+    /* color: white;
+    background-color: gray; */
+    border: 1px solid deepskyblue;
+    
+    vertical-align: middle;
+    text-align: center;
+}
+
+.modal-button {
+    padding: .5rem 1rem;
+    margin-top: 1rem;
+    background-color: crimson;
+    color: white;
+}
+
+.modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+}

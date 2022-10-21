@@ -68,27 +68,26 @@ for(let i = 0; i < prev_next.length; i++)
 
 function NavegaCliente(cod)
 {
-    try{
-        if(cod < 1 || cod > clientes.lenght)
-            throw "erro";
+        if(cod < 1 )
+            AbrirModal("Não existe cliente com código menor");
+        else if( cod > clientes.length)
+            AbrirModal("Ultimo cliente atingido");
     
         let form = document.forms[0];
         form[0].value = clientes[cod-1]["codCliente"];
         form[1].value = clientes[cod-1]["nomeCliente"];
         form[2].value = clientes[cod-1]["dataCadCli"];
-    }
-    catch(erro)
-    {
-        alert("Fim de registro");
-    }
 }
 
 function NavegaProduto(cod)
 {
-    try{
-        if(cod < 1 || cod > produtos.length)
-            throw "Erro";
+    // if(cod < 1 )
+    //     AbrirModal("Não existe produto com código menor");
+    // else if( cod > produtos.length)
+    //     AbrirModal("Ultimo produto atingido");
 
+    try
+    {
         let form = document.forms[1];
         form[0].value = produtos[cod-1]["codProduto"];
         form[1].value = produtos[cod-1]["descProduto"];
@@ -97,7 +96,7 @@ function NavegaProduto(cod)
     }
     catch(erro)
     {
-        alert(erro);
+        AbrirModal("Limite atingido");
     }
 }
 
@@ -248,4 +247,19 @@ function InsereProduto()
 
     let total = document.getElementById("total");
     total.innerHTML = (Number(total.innerHTML) + Number(sub_total.innerHTML)).toFixed(2);
+}
+
+function AbrirModal(texto)
+{
+    const modal = document.getElementById("modal");
+    const text = modal.children[0];
+    const close_button = modal.children[1];
+
+    text.innerHTML = texto;
+
+    modal.showModal();
+    close_button.addEventListener('click', function()
+    {
+        modal.close();
+    })
 }
