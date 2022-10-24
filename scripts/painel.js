@@ -1,51 +1,38 @@
 import { clientes } from "../modules/clientes.js";
 import { produtos } from "../modules/produtos.js"
 
-var button = document.querySelectorAll("a");
+const toggleButtons = document.querySelectorAll(".toggle");
+const forms = document.forms;
+// const formClientes = document.querySelector("#clientes");
+// const formProdutos = document.querySelector("#produtos");
+// const formPedidos = document.querySelector("#pedidos");
 
-for(let i = 0; i < button.length; i++)
+for(let i of toggleButtons)
 {
-    button[i].addEventListener('click', (button) =>
-    {
-        let active = document.forms;
-        
-        let id;
-
-        if(button.target.id == "click-clientes")
-            id = "clientes";
-        else if(button.target.id == "click-produtos")
-            id = "produtos";
-        else
-            id = "pedidos";
-
-        let form = document.getElementById(id);
-        
-        if(form.classList.contains("hidden"))
+    i.addEventListener('click', (e) => {
+        for(let j of forms)
         {
-            if(form.id == 'clientes')
-                NavegaCliente(1);
-            else if (form.id == 'produtos')
-                NavegaProduto(1);
-    
-            for(let forms of active)
-                forms.classList.add("hidden");
+            if(e.target.id.includes(j.id) || e.target.parentElement.parentElement.id.includes(j.id))
+            {
+                let form = document.getElementById(j.id);
+                
+                if(form.classList.contains("hidden"))
+                {
+                    // if(form.id == 'clientes')
+                    //     NavegaCliente(1);
+                    // else if (form.id == 'produtos')
+                    //     NavegaProduto(1);
+                    
+                    
+                    for(let k of forms)
+                        k.classList.add("hidden");
 
-            form.classList.remove("hidden");
+                    form.classList.remove("hidden");
+                }
+                else
+                    form.classList.add("hidden");
+            }
         }
-        else
-            form.classList.add("hidden");
-
-    })
-}
-
-// Quebra galho por enquanto, refatorar depois
-let x = document.querySelectorAll(".x-button");
-for(let i = 0; i < x.length; i++)
-{
-    x[i].addEventListener('click', function()
-    {
-        x[i].parentElement.parentElement.classList.add("hidden");
-        x[i].parentElement.parentElement.classList.remove("visible");
     })
 }
 
@@ -64,6 +51,12 @@ for(let i = 0; i < prev_next.length; i++)
         else if(button.target.id == "next-produto")
             NavegaProduto(cod +1);
     })
+}
+
+function Navegar(cod, form)
+{
+    if(cod < 1 )
+        AbrirModal("Não existe cliente com código menor");
 }
 
 function NavegaCliente(cod)
@@ -96,7 +89,7 @@ function NavegaProduto(cod)
     }
     catch(erro)
     {
-        AbrirModal("Limite atingido");
+        AbrirModal("Limite atingidoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     }
 }
 
