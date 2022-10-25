@@ -6,9 +6,6 @@ const navigate_buttons = document.querySelectorAll(".navigate");
 const new_buttons = document.querySelectorAll(".new");
 const save_buttons = document.querySelectorAll(".save");
 const forms = document.forms;
-// const formClientes = document.querySelector("#clientes");
-// const formProdutos = document.querySelector("#produtos");
-// const formPedidos = document.querySelector("#pedidos");
 
 for(let i of toggle_buttons)
 {
@@ -76,22 +73,29 @@ for(let i of save_buttons)
 
 function Navigate(cod, form)
 {
-    if(cod < 1 )
-        AbrirModal("Não existe menor");
-
-    //@temp - pode ter o conteudo de clientes ou de produtos dependendo do form do parametro;
-    let temp = eval(form.id)
-
-    if(cod > temp.length)
-        AbrirModal("Ultimo atingido");
-    
-    temp = temp[cod-1]
-
-    let i = 0;
-    for(let j in temp)
+    try
     {
-        form[i].value = temp[j];
-        i++;
+        if(cod < 1 )
+            throw `Não existe ${form.id.substring(0, form.id.length-1)} com codigo menor`
+    
+        //@temp - pode ter o conteudo de clientes ou de produtos dependendo do form do parametro;
+        let temp = eval(form.id)
+    
+        if(cod > temp.length)
+            throw `Ultimo ${form.id.substring(0, form.id.length-1)} atingido`
+        
+        temp = temp[cod-1]
+    
+        let i = 0;
+        for(let j in temp)
+        {
+            form[i].value = temp[j];
+            i++;
+        }
+    }
+    catch(err)
+    {
+        AbrirModal(err);
     }
 }
 
@@ -114,15 +118,30 @@ function Novo(cod, form, length)
 
 function Save(form, length)
 {
-    let temp = eval(form.id);
-    let cod = temp[1]
+    try
+    {
+        let temp = eval(form.id);
+        let cod = form[0].value
 
-    let aux = {};
-    for(let i =0; i < length; i++)
-        aux[form[i].name] = form[i].value;
+        if(cod <= Number(temp[temp.length-1][Object.keys(temp[temp.length-1])[0]]))
+            throw `Esse ${form.id.substring(0, form.id.length-1)} ja existe, crie outro pelo botao NOVO`
+    
+        let aux = {};
+        for(let i =0; i < length; i++)
+        {
+            if(form[i].value == "")
+                throw "Não é permitido campos vazios"
 
-    eval(form.id).push(aux);
-    Navigate(1, form);
+            aux[form[i].name] = form[i].value;
+        }
+    
+        eval(form.id).push(aux);
+        Navigate(1, form);
+    }
+    catch(err)
+    {
+        AbrirModal(err);
+    }
 }
 
 let idCliente = document.forms[2];

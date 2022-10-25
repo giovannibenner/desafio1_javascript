@@ -75,14 +75,11 @@ main {
 }
 
 .modal {
-    /* width: 40%; */
     max-width: 30%;
-    word-break: break-all;
+    word-break: normal;
     margin: auto auto;
     padding: 2rem;
 
-    /* color: white;
-    background-color: gray; */
     border: 1px solid deepskyblue;
     
     vertical-align: middle;
