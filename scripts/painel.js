@@ -1,14 +1,16 @@
 import { clientes } from "../modules/clientes.js";
 import { produtos } from "../modules/produtos.js"
 
-const toggleButtons = document.querySelectorAll(".toggle");
-const navigateButtons = document.querySelectorAll(".navigate");
+const toggle_buttons = document.querySelectorAll(".toggle");
+const navigate_buttons = document.querySelectorAll(".navigate");
+const new_buttons = document.querySelectorAll(".new");
+const save_buttons = document.querySelectorAll(".save");
 const forms = document.forms;
 // const formClientes = document.querySelector("#clientes");
 // const formProdutos = document.querySelector("#produtos");
 // const formPedidos = document.querySelector("#pedidos");
 
-for(let i of toggleButtons)
+for(let i of toggle_buttons)
 {
     i.addEventListener('click', (e) => {
         for(let j of forms)
@@ -34,7 +36,7 @@ for(let i of toggleButtons)
     })
 }
 
-for(let i of navigateButtons)
+for(let i of navigate_buttons)
 {
     i.addEventListener('click', (e) =>
     {
@@ -45,10 +47,9 @@ for(let i of navigateButtons)
     })
 }
 
-let newbtn = document.querySelectorAll(".new");
-for(let i = 0; i < newbtn.length; i++)
+for(let i of new_buttons)
 {
-    newbtn[i].addEventListener('click', (e) =>
+    i.addEventListener('click', (e) =>
     {
         let form = e.target.form;
         let pos = eval(form.id).length;
@@ -58,6 +59,18 @@ for(let i = 0; i < newbtn.length; i++)
             Novo(Number(temp[i])+1, form, Object.keys(temp).length)
             break;
         }
+    })
+}
+
+for(let i of save_buttons)
+{
+    i.addEventListener('click', (e) =>
+    {
+        let form = e.target.form;
+        let pos = eval(form.id).length;
+        let temp = eval(form.id)[pos-1]
+
+        Save(form, Object.keys(temp).length);
     })
 }
 
@@ -87,7 +100,7 @@ function Novo(cod, form, length)
     for(let i = 0; i < length; i++)
     {
         form[i].value = ""
-        if(form[i].name == 'data')
+        if(form[i].name == 'dataCadCli')
         {
             var data = new Date();
             var dia = data.getUTCDate();
@@ -99,71 +112,17 @@ function Novo(cod, form, length)
     form[0].value = cod;
 }
 
-let savebtn = document.querySelectorAll(".save");
-for(let i = 0; i < savebtn.length; i++)
+function Save(form, length)
 {
-    savebtn[i].addEventListener('click', (button) =>
-    {
-        if(button.target.id == "save-cliente")
-        {
-            SalvarCliente();
-        }
-        else if(button.target.id == "save-produto")
-        {
-            SalvarProduto();
-        }
-    })
-}
+    let temp = eval(form.id);
+    let cod = temp[1]
 
-function SalvarCliente()
-{
-    let form = document.forms[0];
-    let maiorCod = clientes[clientes.length-1]["codCliente"];
+    let aux = {};
+    for(let i =0; i < length; i++)
+        aux[form[i].name] = form[i].value;
 
-    if(form[0].value <= maiorCod)
-    {
-        return;
-    }
-
-    if(form[1].value == "")
-    {
-        return;
-    }
-
-    let novocliente = {
-        "codCliente" : form[0].value,
-        "nomeCliente" : form[1].value,
-        "dataCadCli" : form[2].value
-    }
-
-    clientes.push(novocliente);
-    NavegaCliente(1);
-}
-
-function SalvarProduto()
-{
-    let form = document.forms[1];
-    let maiorCod = produtos[produtos.length-1]["codProduto"];
-
-    if(form[0].value <= maiorCod)
-    {
-        return;
-    }
-
-    if(form[1].value == "" || form[2].value == "" || form[3].value == "") 
-    {
-        return;
-    }
-
-    let novoproduto = {
-        "codProduto"   : form[0].value,
-        "descProduto"    : form[1].value,
-        "precoProduto" : Number(form[2].value), 
-        "qtdEstoqueProd" : Number(form[3].value), 
-    }
-
-    produtos.push(novoproduto);
-    NavegaProduto(1);
+    eval(form.id).push(aux);
+    Navigate(1, form);
 }
 
 let idCliente = document.forms[2];
