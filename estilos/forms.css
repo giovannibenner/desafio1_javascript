@@ -75,7 +75,7 @@ button {
     border-color: none;
 }
 
-.prev-next {
+.navigate {
     width: 2rem;
     background-color: aliceblue;
 }
@@ -90,7 +90,7 @@ button {
     background-color: limegreen;
 }
 
-.prev-next:hover {
+.navigate:hover {
     color: crimson;
     font-weight: bold;
 }

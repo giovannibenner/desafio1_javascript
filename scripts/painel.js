@@ -2,7 +2,7 @@ import { clientes } from "../modules/clientes.js";
 import { produtos } from "../modules/produtos.js"
 
 const toggleButtons = document.querySelectorAll(".toggle");
-const navigateButtons = document.querySelectorAll(".prev-next");
+const navigateButtons = document.querySelectorAll(".navigate");
 const forms = document.forms;
 // const formClientes = document.querySelector("#clientes");
 // const formProdutos = document.querySelector("#produtos");
@@ -38,7 +38,6 @@ for(let i of navigateButtons)
 {
     i.addEventListener('click', (e) =>
     {
-        console.log(e.target.form[0].value)
         if(e.target.classList.contains("prev"))
             Navigate(Number(e.target.form[0].value) -1, e.target.form)
         else /*if(e.target.classList.contains("next"))*/
@@ -46,9 +45,24 @@ for(let i of navigateButtons)
     })
 }
 
+let newbtn = document.querySelectorAll(".new");
+for(let i = 0; i < newbtn.length; i++)
+{
+    newbtn[i].addEventListener('click', (e) =>
+    {
+        let form = e.target.form;
+        let pos = eval(form.id).length;
+        let temp = eval(form.id)[pos-1];
+        for(let i in temp)
+        {
+            Novo(Number(temp[i])+1, form, Object.keys(temp).length)
+            break;
+        }
+    })
+}
+
 function Navigate(cod, form)
 {
-    console.log(cod)
     if(cod < 1 )
         AbrirModal("Não existe menor");
 
@@ -68,44 +82,21 @@ function Navigate(cod, form)
     }
 }
 
-let newbtn = document.querySelectorAll(".new");
-for(let i = 0; i < newbtn.length; i++)
+function Novo(cod, form, length)
 {
-    newbtn[i].addEventListener('click', (button) =>
+    for(let i = 0; i < length; i++)
     {
-        let codCliente = Number(clientes[clientes.length-1]["codCliente"]) +1;
-        let codProduto = Number(produtos[produtos.length-1]["codProduto"]) +1;
-        if(button.target.id == "new-cliente")
+        form[i].value = ""
+        if(form[i].name == 'data')
         {
-            NovoCliente(codCliente);
+            var data = new Date();
+            var dia = data.getUTCDate();
+            var mes = data.getUTCMonth() + 1;
+            var ano = data.getUTCFullYear();
+            form[i].value = dia + "/" + mes + "/" + ano;
         }
-        else if(button.target.id == "new-produto")
-        {
-            NovoProduto(codProduto);
-        }
-    })
-}
-
-function NovoCliente(cod)
-{
-    var data = new Date();
-    var dia = data.getUTCDate();
-    var mes = data.getUTCMonth() + 1;
-    var ano = data.getUTCFullYear();
-
-    let form = document.forms[0];
+    }
     form[0].value = cod;
-    form[1].value = "";
-    form[2].value = dia + "/" + mes + "/" + ano;
-}
-
-function NovoProduto(cod)
-{
-    let form = document.forms[1];
-    form[0].value = cod;
-    form[1].value = "";
-    form[2].value = "";
-    form[3].value = "";
 }
 
 let savebtn = document.querySelectorAll(".save");
