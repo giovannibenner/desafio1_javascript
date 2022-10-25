@@ -2,6 +2,7 @@ import { clientes } from "../modules/clientes.js";
 import { produtos } from "../modules/produtos.js"
 
 const toggleButtons = document.querySelectorAll(".toggle");
+const navigateButtons = document.querySelectorAll(".prev-next");
 const forms = document.forms;
 // const formClientes = document.querySelector("#clientes");
 // const formProdutos = document.querySelector("#produtos");
@@ -18,11 +19,8 @@ for(let i of toggleButtons)
                 
                 if(form.classList.contains("hidden"))
                 {
-                    // if(form.id == 'clientes')
-                    //     NavegaCliente(1);
-                    // else if (form.id == 'produtos')
-                    //     NavegaProduto(1);
-                    
+                    if(j.id != 'pedidos')
+                        Navigate(1, form);
                     
                     for(let k of forms)
                         k.classList.add("hidden");
@@ -36,60 +34,37 @@ for(let i of toggleButtons)
     })
 }
 
-let prev_next = document.querySelectorAll(".prev-next");
-for(let i = 0; i < prev_next.length; i++)
+for(let i of navigateButtons)
 {
-    prev_next[i].addEventListener('click', (button) =>
+    i.addEventListener('click', (e) =>
     {
-        let cod = Number(prev_next[i].parentElement.parentElement.parentElement[0].value);
-        if(button.target.id == "prev-cliente")
-            NavegaCliente(cod -1);
-        else if(button.target.id == "next-cliente")
-            NavegaCliente(cod +1);
-        else if(button.target.id == "prev-produto")
-            NavegaProduto(cod -1);
-        else if(button.target.id == "next-produto")
-            NavegaProduto(cod +1);
+        console.log(e.target.form[0].value)
+        if(e.target.classList.contains("prev"))
+            Navigate(Number(e.target.form[0].value) -1, e.target.form)
+        else /*if(e.target.classList.contains("next"))*/
+            Navigate(Number(e.target.form[0].value) +1, e.target.form)
     })
 }
 
-function Navegar(cod, form)
+function Navigate(cod, form)
 {
+    console.log(cod)
     if(cod < 1 )
-        AbrirModal("Não existe cliente com código menor");
-}
+        AbrirModal("Não existe menor");
 
-function NavegaCliente(cod)
-{
-        if(cod < 1 )
-            AbrirModal("Não existe cliente com código menor");
-        else if( cod > clientes.length)
-            AbrirModal("Ultimo cliente atingido");
+    //@temp - pode ter o conteudo de clientes ou de produtos dependendo do form do parametro;
+    let temp = eval(form.id)
+
+    if(cod > temp.length)
+        AbrirModal("Ultimo atingido");
     
-        let form = document.forms[0];
-        form[0].value = clientes[cod-1]["codCliente"];
-        form[1].value = clientes[cod-1]["nomeCliente"];
-        form[2].value = clientes[cod-1]["dataCadCli"];
-}
+    temp = temp[cod-1]
 
-function NavegaProduto(cod)
-{
-    // if(cod < 1 )
-    //     AbrirModal("Não existe produto com código menor");
-    // else if( cod > produtos.length)
-    //     AbrirModal("Ultimo produto atingido");
-
-    try
+    let i = 0;
+    for(let j in temp)
     {
-        let form = document.forms[1];
-        form[0].value = produtos[cod-1]["codProduto"];
-        form[1].value = produtos[cod-1]["descProduto"];
-        form[2].value = produtos[cod-1]["precoProduto"];
-        form[3].value = produtos[cod-1]["qtdEstoqueProd"];
-    }
-    catch(erro)
-    {
-        AbrirModal("Limite atingidoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        form[i].value = temp[j];
+        i++;
     }
 }
 
