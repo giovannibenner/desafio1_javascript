@@ -102,8 +102,9 @@ produto_input.addEventListener('focusout', (e) => {
     }
 });
 
-insere_button.addEventListener('click', function(){
-    InsereProduto();
+insere_button.addEventListener('click', (e) => {
+    let form = e.target.form;
+    InsereProduto(form);
 });
 
 function Navigate(cod, form)
@@ -179,7 +180,7 @@ function Save(form, length)
     }
 }
 
-function InsereProduto()
+function InsereProduto(form)
 {
     for(let i = 0; i < forms[2].length-1; i++)
     {
@@ -200,21 +201,20 @@ function InsereProduto()
         }
     }
 
-    let linha = table.insertRow(table.rows.length-1);
-    linha.classList.add("line");
+    let row = table.insertRow(table.rows.length-1);
+    row.classList.add("line");
 
-    let item = linha.insertCell(0);
-    let desc = linha.insertCell(1);
-    let preco = linha.insertCell(2);
-    let qtd = linha.insertCell(3);
-    let sub_total = linha.insertCell(4);
+    let item = row.insertCell(0);
+    let desc = row.insertCell(1);
+    let preco = row.insertCell(2);
+    let qtd = row.insertCell(3);
+    let sub_total = row.insertCell(4);
 
-    let form_pedido = document.forms[2];
-    item.innerHTML = form_pedido[2].value;
-    desc.innerHTML = form_pedido[3].value;
-    preco.innerHTML = form_pedido[4].value;
-    qtd.innerHTML = form_pedido[5].value;
-    sub_total.innerHTML = (Number(form_pedido[5].value) * Number(preco.innerHTML)).toFixed(2);
+    item.innerHTML = form[2].value;
+    desc.innerHTML = form[3].value;
+    preco.innerHTML = form[4].value;
+    qtd.innerHTML = form[5].value;
+    sub_total.innerHTML = (Number(form[5].value) * Number(preco.innerHTML)).toFixed(2);
 
     let total = document.getElementById("total");
     total.innerHTML = (Number(total.innerHTML) + Number(sub_total.innerHTML)).toFixed(2);

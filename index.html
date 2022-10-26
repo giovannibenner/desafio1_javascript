@@ -10,15 +10,16 @@
 </head>
 <body>
     <main>
-        <h1>Log <span>in</span></h1>
-        <form id="login" onsubmit="ValidarLogin()" class="formulario">
+        <h1 style="padding: 10px">Log <span style="color: deepskyblue;">in</span></h1>
+        <form action="painel.html" id="login" class="formulario">
             <label for="user">Usuário</label>
             <input type="text" id="user" placeholder="digite seu usuario" required>
 
             <label for="password">Senha</label>
             <input type="password" id="password" placeholder="digite sua senha" required>
 
-            <input type="submit" value="ENTRAR" class="button" >
+            <input type="button" value="ENTRAR" class="validate-button" >
+            <p class="log"></p>
         </form>
     </main>
 

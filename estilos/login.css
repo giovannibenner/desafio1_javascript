@@ -24,14 +24,6 @@ main {
     background-size: 100% 100%;
 }
 
-h1{
-    padding: 10px;
-}
-
-span {
-    color: deepskyblue;
-}
-
 .formulario {
     width: 300px;
     height: auto;
@@ -57,7 +49,7 @@ input {
     border-radius: 2px;
 }
 
-.button {
+.validate-button {
     height: 4em;
 
     margin-top: 10px;
@@ -67,7 +59,12 @@ input {
     background-color: gray;
 }
 
-.button:hover {
+.validate-button:hover {
     color: black;
     background-color: deepskyblue;
+}
+
+.log {
+    font-size: 18px;
+    text-align: center;
 }
