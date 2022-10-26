@@ -5,6 +5,9 @@ const toggle_buttons = document.querySelectorAll(".toggle");
 const navigate_buttons = document.querySelectorAll(".navigate");
 const new_buttons = document.querySelectorAll(".new");
 const save_buttons = document.querySelectorAll(".save");
+const cliente_input = document.getElementById("pedido-cliente")
+const produto_input = document.getElementById("pedido-produto");
+const insere_button = document.getElementById("insere-pedido");
 const forms = document.forms;
 
 for(let i of toggle_buttons)
@@ -53,7 +56,7 @@ for(let i of new_buttons)
         let temp = eval(form.id)[pos-1];
         for(let i in temp)
         {
-            Novo(Number(temp[i])+1, form, Object.keys(temp).length)
+            New(Number(temp[i])+1, form, Object.keys(temp).length)
             break;
         }
     })
@@ -70,6 +73,38 @@ for(let i of save_buttons)
         Save(form, Object.keys(temp).length);
     })
 }
+
+cliente_input.addEventListener('focusout', (e) => {
+    let nomecliente_input = document.getElementById("pedido-nomecliente");
+    try
+    {
+        if(cliente_input.value >= clientes.lenght || cliente_input < 1)
+            throw "";
+
+        nomecliente_input.value = clientes[e.target.value -1]["nomeCliente"];
+    }
+    catch(err)
+    {
+        AbrirModal("Cliente não existente");
+    }
+});
+
+produto_input.addEventListener('focusout', (e) => {
+    try
+    {
+        let pedido_form = forms[2];
+        pedido_form[3].value = produtos[e.target.value -1]["descProduto"];
+        pedido_form[4].value = produtos[e.target.value -1]["precoProduto"];
+    }
+    catch(err)
+    {
+        AbrirModal("Produto não existente");
+    }
+});
+
+insere_button.addEventListener('click', function(){
+    InsereProduto();
+});
 
 function Navigate(cod, form)
 {
@@ -99,18 +134,18 @@ function Navigate(cod, form)
     }
 }
 
-function Novo(cod, form, length)
+function New(cod, form, length)
 {
     for(let i = 0; i < length; i++)
     {
         form[i].value = ""
         if(form[i].name == 'dataCadCli')
         {
-            var data = new Date();
-            var dia = data.getUTCDate();
-            var mes = data.getUTCMonth() + 1;
-            var ano = data.getUTCFullYear();
-            form[i].value = dia + "/" + mes + "/" + ano;
+            let data = new Date();
+            let dia = data.getUTCDate();
+            let mes = data.getUTCMonth() + 1;
+            let ano = data.getUTCFullYear();
+            form[i].value =  dia + "/" + mes + "/" + ano;
         }
     }
     form[0].value = cod;
@@ -144,28 +179,27 @@ function Save(form, length)
     }
 }
 
-let idCliente = document.forms[2];
-idCliente[0].addEventListener('focusout', (event) => {
-    if(idCliente[0].value >= clientes.lenght || idCliente[0] < 1)
-        console.log("erro");
-    else
-        idCliente[1].value = clientes[event.target.value -1]["nomeCliente"];
-});
-
-let idProduto = document.forms[2];
-idProduto[2].addEventListener('focusout', (event) => {
-    idProduto[3].value = produtos[event.target.value -1]["descProduto"];
-    idProduto[4].value = produtos[event.target.value -1]["precoProduto"];
-});
-
-let pedido = document.getElementById("insere-pedido");
-pedido.addEventListener('click', function(){
-    InsereProduto();
-});
-
 function InsereProduto()
 {
+    for(let i = 0; i < forms[2].length-1; i++)
+    {
+        if(forms[2][i].value == "")
+        {
+            AbrirModal("Campo vazio não permitido");
+            return;
+        }
+    }
+
     let table = document.querySelector("table");
+    for(let i of table.rows)
+    {
+        if(produto_input.value == i.cells[0].textContent)
+        {
+            AbrirModal("Esse produto ja está em uso em algum pedido");
+            return;   
+        }
+    }
+
     let linha = table.insertRow(table.rows.length-1);
     linha.classList.add("line");
 
@@ -186,17 +220,17 @@ function InsereProduto()
     total.innerHTML = (Number(total.innerHTML) + Number(sub_total.innerHTML)).toFixed(2);
 }
 
-function AbrirModal(texto)
+function AbrirModal(text_aux)
 {
     const modal = document.getElementById("modal");
     const text = modal.children[0];
     const close_button = modal.children[1];
 
-    text.innerHTML = texto;
+    text.innerHTML = text_aux;
 
     modal.showModal();
     close_button.addEventListener('click', function()
     {
         modal.close();
-    })
+    });
 }
