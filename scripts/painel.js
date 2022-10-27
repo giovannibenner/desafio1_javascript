@@ -5,9 +5,9 @@ const toggle_buttons = document.querySelectorAll(".toggle");
 const navigate_buttons = document.querySelectorAll(".navigate");
 const new_buttons = document.querySelectorAll(".new");
 const save_buttons = document.querySelectorAll(".save");
-const cliente_input = document.getElementById("pedido-cliente")
-const produto_input = document.getElementById("pedido-produto");
-const insere_button = document.getElementById("insere-pedido");
+const cliente_input = document.getElementById("pedido-cliente");
+const produto_input = document.getElementById("pedido-produto"); 
+const insere_button = document.getElementById("insere-pedido"); 
 const forms = document.forms;
 
 for(let i of toggle_buttons)
@@ -42,7 +42,7 @@ for(let i of navigate_buttons)
     {
         if(e.target.classList.contains("prev"))
             Navigate(Number(e.target.form[0].value) -1, e.target.form)
-        else /*if(e.target.classList.contains("next"))*/
+        else
             Navigate(Number(e.target.form[0].value) +1, e.target.form)
     })
 }
@@ -85,7 +85,8 @@ cliente_input.addEventListener('focusout', (e) => {
     }
     catch(err)
     {
-        AbrirModal("Cliente não existente");
+        if(e.target.value != "")
+            AbrirModal("Cliente não existente");
     }
 });
 
@@ -98,7 +99,8 @@ produto_input.addEventListener('focusout', (e) => {
     }
     catch(err)
     {
-        AbrirModal("Produto não existente");
+        if(e.target.value != "")
+            AbrirModal("Produto não existente");
     }
 });
 
@@ -182,9 +184,9 @@ function Save(form, length)
 
 function InsereProduto(form)
 {
-    for(let i = 0; i < forms[2].length-1; i++)
+    for(let i = 0; i < form.length-1; i++)
     {
-        if(forms[2][i].value == "")
+        if(form[i].value == "")
         {
             AbrirModal("Campo vazio não permitido");
             return;

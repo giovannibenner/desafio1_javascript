@@ -17,6 +17,29 @@ main {
     height: 100vh;
 }
 
+.modal {
+    max-width: 30%;
+    word-break: normal;
+    margin: auto auto;
+    padding: 2rem;
+
+    border: 1px solid deepskyblue;
+    
+    vertical-align: middle;
+    text-align: center;
+}
+
+.modal-button {
+    padding: .5rem 1rem;
+    margin-top: 1rem;
+    background-color: crimson;
+    color: white;
+}
+
+.modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
 .sidemenu {
     width: 20%;
     height: 100%;
@@ -75,35 +98,12 @@ main {
     padding: 10px;
 }
 
-.modal {
-    max-width: 30%;
-    word-break: normal;
-    margin: auto auto;
-    padding: 2rem;
-
-    border: 1px solid deepskyblue;
-    
-    vertical-align: middle;
-    text-align: center;
-}
-
-.modal-button {
-    padding: .5rem 1rem;
-    margin-top: 1rem;
-    background-color: crimson;
-    color: white;
-}
-
-.modal::backdrop {
-    background-color: rgba(0, 0, 0, 0.3);
-}
-
 .form-section {
     width: 80%;
     height: 100%;
     display: flex;
     align-items: center;
 
-    background-image: url(v748-toon-103.jpg);
+    background-image: url("../assets/painel-background.jpg");
     background-size: 100% 100%;
 }

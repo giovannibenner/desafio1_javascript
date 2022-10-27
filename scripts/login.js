@@ -4,12 +4,14 @@ const log = document.querySelector(".log");
 validate_button.addEventListener('click', function()
 {
     fetch('usuario.json')
-    .then((response) => response.json())
-    .then((data) => {
+        .then((response) => response.json())
+        .then((data) => {
 
         let username = document.getElementById("user").value;
         let password = document.getElementById("password").value;
+
         let validate = false;
+
         data["users"].forEach(user => {
             if(user.user == username  && user.pws == password)
             {
@@ -18,6 +20,7 @@ validate_button.addEventListener('click', function()
                 log.style.color = 'green';
                 log.innerHTML = "Sucesso";
 
+                // submete o formulario caso as credencias batam com algum usuario
                 let form = document.getElementById('login');
                 form.submit();
             }

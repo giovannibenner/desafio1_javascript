@@ -52,6 +52,12 @@ label {
     font-size: 1.2rem;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .bottom-button {
     width: 50%;
     margin: 0 auto;
@@ -118,13 +124,13 @@ button {
     margin-right: 1rem;
 }
 
-.localizar {
+.inserir {
     padding: 0.4rem;
     height: auto;
     background-color: limegreen;
 }
 
-.localizar:hover {
+.inserir:hover {
     color: white;
 }
 

@@ -20,7 +20,7 @@ main {
     justify-content: center;
     align-items: center;
 
-    background-image: url(v1016-a-08.jpg);
+    background-image: url("../assets/login-background.jpg");
     background-size: 100% 100%;
 }
 
