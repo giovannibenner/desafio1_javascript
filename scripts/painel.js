@@ -193,6 +193,14 @@ function InsereProduto(form)
         }
     }
 
+    let qtd_input = document.getElementById("qtd");
+    let produto_input = form[2].value
+    if(qtd_input.value > produtos[produto_input-1]["qtdEstoqueProd"])
+    {
+        AbrirModal("Quantidade excedida ao estoque");
+        return;
+    }
+
     let table = document.querySelector("table");
     for(let i of table.rows)
     {
