@@ -194,8 +194,7 @@ function InsereProduto(form)
     }
 
     let qtd_input = document.getElementById("qtd");
-    let produto_input = form[2].value
-    if(qtd_input.value > produtos[produto_input-1]["qtdEstoqueProd"])
+    if(qtd_input.value > produtos[Number(produto_input.value)-1]["qtdEstoqueProd"])
     {
         AbrirModal("Quantidade excedida ao estoque");
         return;
